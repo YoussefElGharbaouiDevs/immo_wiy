@@ -3,35 +3,53 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1 class="mb-4">Créer un compte</h1>
-
-    {# Affichage des messages de succès (par exemple, après l'inscription) #}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
+<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center" style="background-color: #f8f9fa;">
+    <div class="row bg-white shadow-lg rounded" style="max-width: 900px; overflow: hidden;">
+        {# Section de l'image à gauche #}
+        <div class="col-md-6 d-none d-md-block" style="background: url('{{ asset('images/registration.jpg') }}') no-repeat center center / cover;">
         </div>
-    {% endfor %}
 
-    {# Affichage des messages d'erreur globaux du formulaire #}
-    {% if registrationForm.vars.errors|length > 0 %}
-        <div class="alert alert-danger">
-            <ul>
-                {% for error in registrationForm.vars.errors %}
-                    <li>{{ error.message }}</li>
-                {% endfor %}
-            </ul>
+        {# Section du formulaire à droite #}
+        <div class="col-md-6 p-5">
+            <h1 class="mb-4 text-center">Créer un compte</h1>
+
+            {# Affichage des messages de succès #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {# Affichage des messages d'erreur globaux du formulaire #}
+            {% if registrationForm.vars.errors|length > 0 %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for error in registrationForm.vars.errors %}
+                            <li>{{ error.message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {# Formulaire d'inscription #}
+            {{ form_start(registrationForm) }}
+                <div class="mb-3">
+                    {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.password, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">S'inscrire</button>
+                </div>
+            {{ form_end(registrationForm) }}
         </div>
-    {% endif %}
-
-    {# Formulaire d'inscription #}
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.password) }}
-
-        <button type="submit" class="btn btn-primary mt-3">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+    </div>
 </div>
 {% endblock %}
