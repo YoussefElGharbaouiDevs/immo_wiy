@@ -1,0 +1,40 @@
+{# templates/details/details.html.twig #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la Maison</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MaisonLoc</a>
+        </div>
+    </nav>
+
+    <!-- Détails de la Maison -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">{{ house.title }}</h2> <!-- Affiche le nom de la maison -->
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ house.image }}" class="img-fluid" alt="{{ house.title }}">
+            </div>
+            <div class="col-md-6">
+                <h5>Description</h5>
+                <p>{{ house.description }}</p>
+                <h5>Prix</h5>
+                <p class="text-success fw-bold">{{ house.price }} MAD/mois</p>
+                <!-- Bouton pour payer -->
+                <a href="{{ path('app_payment', {'id': house.id}) }}" class="btn btn-primary">Payer</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

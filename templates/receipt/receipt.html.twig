@@ -1,0 +1,90 @@
+{# templates/receipt/receipt.html.twig #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Reçu de Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .receipt {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+        .header, .details, .footer {
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            text-align: center;
+            color: #333;
+        }
+        .details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .details table th, .details table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <div class="header">
+            <h1>Reçu de Paiement</h1>
+            <p><strong>Date :</strong> {{ payment.paymentDate|date('Y-m-d H:i:s') }}</p>
+        </div>
+
+        <div class="details">
+            <h3>Détails du paiement :</h3>
+            <table>
+                <tr>
+                    <th>Nom du client</th>
+                    <td>{{ payment.firstName }} {{ payment.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>Montant payé</th>
+                    <td>{{ payment.paymentAmount }} MAD</td>
+                </tr>
+                <tr>
+                    <th>Type de carte</th>
+                    <td>{{ payment.cardType }}</td>
+                </tr>
+                <tr>
+                    <th>Numéro de carte</th>
+                    <td>{{ payment.cardNumber|slice(0, 4) }}-****-****-{{ payment.cardNumber|slice(-4) }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="details">
+            <h3>Détails de la maison :</h3>
+            <table>
+                <tr>
+                    <th>Titre</th>
+                    <td>{{ house.title }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ house.price }} MAD</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Merci pour votre achat !</p>
+        </div>
+    </div>
+</body>
+</html>
